@@ -1,17 +1,23 @@
-const Workout = require('../models/workout.js');
+const { Workout } = require('../models/workout.js');
 const mongojs = require("mongojs");
 const router = require("express").Router();
 
 // get info for the workouts page
 router.get("/api/workouts", (req, res) => {
-    Workout.find({})
-        .then(dbWorkout => {
-            res.status(200).json(dbWorkout);
-        })
-        .catch(err => {
-            res.status(400).json(err);
+    Workout.find({}).then(dbWorkout => {
+        const result = dbWorkout.map(workout => {
+            const workoutEl = workout.toObject();
+            workoutEl.totalDuration = workout.exercises.reduce((totalDuration, exercise) => totalDuration + exercise.duration, 0);
+
+            return workout;
         });
-})
+
+        res.status(200).json(dbWorkout);
+    }).catch(err => {
+        res.status(400).json(err);
+    })
+});
+
 
 // get info for the range page
 router.get("/api/workouts/range", ({}, res) => {
@@ -27,9 +33,11 @@ router.get("/api/workouts/range", ({}, res) => {
 
 // post submits new completed workouts
 router.post("/api/workouts", (req, res) => {
-    Workout.create(req.body)
-        .then((dbWorkout) => {
-            res.status(200).json(dbWorkout);
+    const workout = req.body;
+
+    Workout.create(workout)
+        .then((result) => {
+            res.status(200).json(result);
         }).catch(err => {
             res.status(400).json(err);
         });
@@ -37,11 +45,14 @@ router.post("/api/workouts", (req, res) => {
 
 // put to update workouts and update the exercsise body
 router.put("/api/workouts/:id", (req, res) => {
-    Workout.findById(req.params.id)
+    const exercise = req.body;
+    const workoutId = req.params.id;
+
+    Workout.findById(workoutId)
         .then((workout) => {
-            workout.exercises.push(req.body);
-            Workout.updateOne({ _id: req.params.id }, workout, (err, result) => {
-                res.json(workout);
+            workout.exercises.push(exercise);
+            workout.save().then(res => {
+                res.json(res);
             });
         })
         .catch((err) => {
