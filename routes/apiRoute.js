@@ -1,10 +1,12 @@
 const Workout = require('../models/workout.js');
+const mongojs = require("mongojs");
 
 module.exports = function(app) {
 
     // App.get to pull up info for the workouts page
     app.get("/api/workouts", (req, res) => {
-        Workout.find({}).then(dbWorkout => {
+        Workout.find({})
+            .then(dbWorkout => {
                 res.status(200).json(dbWorkout);
             })
             .catch(err => {
