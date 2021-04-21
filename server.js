@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 //db connections
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitTrak", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
