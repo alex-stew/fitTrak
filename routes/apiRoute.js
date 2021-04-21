@@ -36,10 +36,15 @@ module.exports = function(app) {
 
     // App.put to update workouts by MongoDB _id value and update the exercsise body
     app.put("/api/workouts/:id", (req, res) => {
-        Workout.findByIdAndUpdate({ _id: req.params.id }, { exercises: req.body }).then((dbWorkout) => {
-            res.status(200).json(dbWorkout);
-        }).catch(err => {
-            res.status(400).json(err);
-        });
+        Workout.findById(req.params.id)
+            .then((workout) => {
+                workout.exercises.push(req.body);
+                Workout.updateOne({ _id: req.params.id }, workout, (err, result) => {
+                    res.json(workout);
+                });
+            })
+            .catch((err) => {
+                res.status(400).json(err);
+            });
     });
 }
