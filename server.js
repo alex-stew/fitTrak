@@ -1,11 +1,14 @@
 //install packages
 const express = require('express');
+const logger = require("morgan");
 const mongoose = require('mongoose');
 
 //set port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3003;
 
 const app = express();
+
+app.use(logger("dev"));
 
 //parser
 app.use(express.urlencoded({ extended: true }));
@@ -15,7 +18,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 //db connections
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitTrak", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -23,8 +26,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitTrak", {
 });
 
 //routes
-app.use(require('./routes/api-routes.js'));
-app.use(require('./routes/html-routes.js'));
+require('./routes/apiRoute.js')(app);
+require('./routes/htmlRoute.js')(app);
 
 // server listening
 app.listen(PORT, () => {

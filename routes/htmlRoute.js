@@ -1,8 +1,8 @@
-const db = require('../models');
-const path = require("path");
+const path = require('path');
 
-// setting page routes
-module.exports = (app) => {
+module.exports = function(app) {
+
+    // page roputing for htmls
     app.get("/", (req, res) => {
         res.sendFile(path.join(__dirname, '..', '/public/index.html'));
     });
