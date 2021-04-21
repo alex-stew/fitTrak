@@ -26,8 +26,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitTrak", {
 });
 
 //routes
-require('./routes/apiRoute.js')(app);
-require('./routes/htmlRoute.js')(app);
+app.use(require("./routes/apiRoute.js"));
+app.use(require("./routes/htmlRoute.js"));
 
 // server listening
 app.listen(PORT, () => {
