@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //use static files
-app.use(express.static("public"));
+app.use(express.static("public", { extensions: ["html"] }));
 
 //db connections
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitTrak", {
@@ -27,7 +27,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitTrak", {
 
 //routes
 app.use(require("./routes/apiRoute.js"));
-app.use(require("./routes/htmlRoute.js"));
+// app.use(require("./routes/htmlRoute.js"));
 
 // server listening
 app.listen(PORT, () => {
