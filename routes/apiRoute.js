@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const mongojs = require("mongojs");
-const { Workout } = require('../models/workout.js');
+const { Workout } = require('../models/workout');
 
 // get info for the workouts page
 router.get("/api/workouts", (req, res) => {
@@ -12,8 +11,6 @@ router.get("/api/workouts", (req, res) => {
             res.status(400).json(err);
         });
 });
-
-
 
 // get info for the range page
 router.get("/api/workouts/range", ({}, res) => {

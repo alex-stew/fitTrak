@@ -6,6 +6,7 @@ const WorkoutSchema = new Schema({
         type: Date,
         default: Date.now
     },
+
     exercises: [{
         type: {
             type: String,
@@ -34,9 +35,9 @@ const WorkoutSchema = new Schema({
         totalDuration: {
             type: Number
         },
-    }],
+    }]
 });
 
 const Workout = mongoose.model("Workout", WorkoutSchema);
 
-module.exports = Workout;
+module.exports = { Workout };
