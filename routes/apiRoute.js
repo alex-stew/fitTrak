@@ -15,7 +15,7 @@ router.get("/api/workouts", (req, res) => {
 // get info for the range page
 router.get("/api/workouts/range", ({}, res) => {
     Workout.find({})
-    limit(10)
+        .limit(7)
         .then((dbWorkout) => {
             res.status(200).json(dbWorkout);
         }).catch(err => {
