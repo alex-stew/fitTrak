@@ -1,5 +1,7 @@
 # FitTrak ![License](https://img.shields.io/badge/License--blue.svg "License Badge")
 
+![Screen Shot 2021-04-22 at 2 01 51 pm](https://user-images.githubusercontent.com/69836062/115655991-81d94b00-a373-11eb-9b1b-4c270c9b5957.png)
+
   ## Table of Contents
   - [Description](#description)
   - [Installation](#installation)
@@ -14,7 +16,8 @@
     
   ## Installation:
 
-    Nil. Application is live hosted through Heroku.
+    Nil. Application is live hosted through Heroku 
+  - (https://enigmatic-lowlands-39676.herokuapp.com/)
 
   ## Usage:
 
