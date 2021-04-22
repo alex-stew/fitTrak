@@ -16,7 +16,8 @@
     
   ## Installation:
 
-    Nil. Application is live hosted through Heroku https://enigmatic-lowlands-39676.herokuapp.com/.
+    Nil. Application is live hosted through Heroku 
+  - (https://enigmatic-lowlands-39676.herokuapp.com/)
 
   ## Usage:
 
